@@ -31,6 +31,8 @@ app.use(function(req, res, next) {
     err.status = 404;
     next(err);
 });
+app.set('port', process.env.PORT || 3000);
+console.log('go to: http://localhost:' + app.get('port'));
 
 // error handlers
 
@@ -55,6 +57,5 @@ app.use(function(err, req, res, next) {
         error: {}
     });
 });
-
 
 module.exports = app;
