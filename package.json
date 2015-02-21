@@ -1,19 +1,17 @@
 {
   "name": "capture",
-  "version": "1.0.0",
-  "description": "Instantly generate websites and apps from mocks.",
-  "main": "index.js",
+  "version": "0.0.0",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node ./bin/www"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/grant/capture.git"
-  },
-  "author": "Grant Timmerman",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/grant/capture/issues"
-  },
-  "homepage": "https://github.com/grant/capture"
+  "dependencies": {
+    "body-parser": "~1.10.1",
+    "cookie-parser": "~1.3.3",
+    "debug": "~2.1.1",
+    "express": "~4.11.0",
+    "jade": "~1.9.0",
+    "morgan": "~1.5.1",
+    "serve-favicon": "~2.2.0"
+  }
 }
