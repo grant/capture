@@ -14,7 +14,7 @@ var json = {
       right: 1,
       bottom: 0.1,
     },
-    color: [234, 12, 221],
+    color: [100, 30, 200],
     text: 'NAV BAR'
   }, {
     box: {
@@ -23,7 +23,7 @@ var json = {
       right: 0.3,
       bottom: 0.6,
     },
-    color: [0, 255, 0],
+    color: [0, 150, 0],
     text: 'hello there'
   }, {
     box: {
@@ -32,7 +32,7 @@ var json = {
       right: 0.6,
       bottom: 0.6,
     },
-    color: [0, 255, 0],
+    color: [0, 150, 0],
     text: 'hello there'
   }, {
     box: {
@@ -41,7 +41,7 @@ var json = {
       right: 0.9,
       bottom: 0.6,
     },
-    color: [0, 255, 0],
+    color: [0, 150, 0],
     text: 'hello there'
   }],
 }
@@ -52,16 +52,26 @@ var rgbString = function(rectIndex) {
 var boxString = function(rectIndex) {
   var box = json.rects[rectIndex].box;
   box.left*=100;
-  box.top*=100
+  box.top*=100;
   box.right*=100;
-  box.bottom*=100
-  console.log(box);
+  box.bottom*=100;
 
   return 'margin-left:'+box.left+'%;margin-top:'+box.top+'%;width:'+(box.right-box.left)+'%;height:'+(box.bottom-box.top)+'%;';
 }
 
 for (i=0; i<json.rects.length; i++) {
-  $('#mainBody').append('<div class="absolute" style="text-align: center;'+boxString(i)+rgbString(i)+'">'+json.rects[i].text+'</div>'); 
+  $('#mainBody').append('<div id="'+i+'" class="absolute" style="text-align: center;'+boxString(i)+rgbString(i)+'">'+json.rects[i].text+'</div>'); 
 }
 
+$('.absolute').click(function() {
+  var clickedId = $(this).attr('id');
+  var currentRgb = json.rects[clickedId].color; //rgb array
+  var currentText = json.rects[clickedId].text;
 
+  var newText = prompt("Change Text");
+
+  if (newText) {
+    $('#'+clickedId).text(newText);
+  }
+  // alert('clickedId: ' + clickedId + '\ncurrentRgb: ' + currentRgb + '\ncurrentText: ' + currentText);
+});
