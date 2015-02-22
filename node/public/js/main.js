@@ -78,35 +78,61 @@ var fire = new Firebase('https://shining-fire-1739.firebaseio.com/');
 
 // fire.set(json);
 
-var myURL = document.URL;
+var myURL = window.location.pathname;
 var siteid = stripQueryStringAndHashFromPath(myURL);
+
+function getRandomColor () {
+  return {
+    r: Math.round(Math.random() * 255),
+    g: Math.round(Math.random() * 255),
+    b: Math.round(Math.random() * 255)
+  }
+}
 
 var json;
 fire.child(siteid).once('value', function(snap) {
   json = snap.val();
+  var rects = json.rects;
 
   var rgbString = function(rectIndex) {
-    return 'background-color: rgb(' + json[rectIndex].color.r+','+json[rectIndex].color.g+','+json[rectIndex].color.b+ ');';
-  }
+    var color = rects[rectIndex].color;
+    if (!color) {
+      color = getRandomColor();
+      // {
+      //   r: 123,
+      //   g: 123,
+      //   b: 123
+      // };
+    }
+    return 'background-color: rgb(' + [color.r, color.g, color.b].join(', ') + ');';
+  };
 
   var boxString = function(rectIndex) {
-    var box = json[rectIndex].box;
-    box.left*=100;
-    box.top*=100;
-    box.right*=100;
-    box.bottom*=100;
+    var box = rects[rectIndex];
+    var x = box[0] * 100;
+    var y = box[1] * 100;
+    var width = box[2] * 100;
+    var height = box[3] * 100;
 
-    return 'margin-left:'+box.left+'%;margin-top:'+box.top+'%;width:'+(box.right-box.left)+'%;height:'+(box.bottom-box.top)+'%;';
-  }
-  console.log(json);
-  $.each(json, function(i, val) {
-    $('#mainBody').append('<div id="'+i+'" class="absolute" style="text-align: center;'+boxString(i)+rgbString(i)+'">'+json[i].text+'</div>');
+    return [
+      'margin-left:'+x+'%',
+      'margin-top:'+y+'%',
+      'width:'+width+'%',
+      'height:'+height+'%;'
+    ].join(';');
+  };
+
+  $.each(rects, function(i, rect) {
+    if (!rect.text) {
+      rect.text = '';
+    }
+    $('#mainBody').append('<div id="'+i+'" class="absolute" style="text-align: center;'+boxString(i)+rgbString(i)+'">'+rect.text+'</div>');
   });
 
   $('.absolute').click(function() {
     var clickedId = $(this).attr('id');
-    var currentRgb = json[clickedId].color; //rgb array
-    var currentText = json[clickedId].text;
+    var currentRgb = rects[clickedId].color; //rgb array
+    var currentText = rects[clickedId].text;
 
     var newText = prompt("Change Text");
 
