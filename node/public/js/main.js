@@ -173,13 +173,14 @@ fire.child(siteid).once('value', function(snap) {
 
 
     // var newText = prompt("Change Text");
+    // var newText = 
 
     // fire.child('rects').child(clickedId).child('text').set(newText);
 
-    // if (newText) {
-      // $('#'+clickedId).text(newText);
+    if (newText) {
+      $('#'+clickedId).text(newText);
       // fire.child(json + '.' + clickedId)
-    // }
+    }
     // alert('clickedId: ' + clickedId + '\ncurrentRgb: ' + currentRgb + '\ncurrentText: ' + currentText);
   });
   $(".color").click(function(){
@@ -207,7 +208,10 @@ fire.child(siteid).once('value', function(snap) {
   });
 
   $(".submit").click(function(){
-      $("#edit").fadeOut(300);
+    textVal = $('#newText').val();
+    fire.child(siteid).child('rects').child(currentRectId).child('color').set(textVal);
+    console.log(textVal);
+    $("#edit").fadeOut(300);
   });
 });
 
