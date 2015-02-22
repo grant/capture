@@ -78,10 +78,12 @@ var fire = new Firebase('https://shining-fire-1739.firebaseio.com/');
 
 // fire.set(json);
 
-var json;
-fire.child('rects').once('value', function(snap) {
-  json = snap.val();
+var myURL = document.URL;
+var siteid = stripQueryStringAndHashFromPath(myURL);
 
+var json;
+fire.child(siteid).once('value', function(snap) {
+  json = snap.val();
 
   var rgbString = function(rectIndex) {
     return 'background-color: rgb(' + json[rectIndex].color.r+','+json[rectIndex].color.g+','+json[rectIndex].color.b+ ');';
@@ -98,7 +100,7 @@ fire.child('rects').once('value', function(snap) {
   }
   console.log(json);
   $.each(json, function(i, val) {
-    $('#mainBody').append('<div id="'+i+'" class="absolute" style="text-align: center;'+boxString(i)+rgbString(i)+'">'+json[i].text+'</div>'); 
+    $('#mainBody').append('<div id="'+i+'" class="absolute" style="text-align: center;'+boxString(i)+rgbString(i)+'">'+json[i].text+'</div>');
   });
 
   $('.absolute').click(function() {
@@ -118,6 +120,6 @@ fire.child('rects').once('value', function(snap) {
   });
 });
 
-
-
-
+function stripQueryStringAndHashFromPath(url) {
+  return url.split("?")[0].split("#")[0];
+}
