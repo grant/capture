@@ -1,6 +1,8 @@
 # capture
 Instantly generate websites and apps from mocks.
 
+Also see https://github.com/grant/capture-opencv
+
 ### abstract schema
 
 ```sh
