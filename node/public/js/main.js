@@ -81,12 +81,26 @@ var fire = new Firebase('https://shining-fire-1739.firebaseio.com/');
 var myURL = window.location.pathname;
 var siteid = stripQueryStringAndHashFromPath(myURL);
 
-function getRandomColor () {
-  return {
-    r: Math.round(Math.random() * 255),
-    g: Math.round(Math.random() * 255),
-    b: Math.round(Math.random() * 255)
-  }
+function getRandomColor (i) {
+  var allcolors = [
+                  [255,255,255],
+                  [0,0,0],
+                  [26,188,156],
+                  [46,204,113],
+                  [52,152,219],
+                  [155,89,182],
+                  [241,196,15],
+                  [230,126,34],
+                  [231,76,60],
+                  [52,73,9],
+                  ]
+  return allcolors[i];
+  
+  // return {
+  //   r: Math.round(Math.random() * 255),
+  //   g: Math.round(Math.random() * 255),
+  //   b: Math.round(Math.random() * 255)
+  // }
 }
 
 var active;
@@ -107,6 +121,8 @@ fire.child(siteid).once('value', function(snap) {
   json = snap.val();
   var rects = json.rects;
   var aspectRatio = json.aspectRatio;
+  var currentRectId;
+
   // Set aspect ratio
   $('#mainBody').css({
     height: (100 / aspectRatio) + 'vw'
@@ -116,9 +132,10 @@ fire.child(siteid).once('value', function(snap) {
   var rgbString = function(rectIndex) {
     var color = rects[rectIndex].color;
     if (!color) {
-      color = getRandomColor();
+      color = getRandomColor(rectIndex);
     }
-    return 'background-color: rgb(' + [color.r, color.g, color.b].join(', ') + ');';
+    fire.child(siteid).child('rects').child(rectIndex).child('color').set(color);
+    return 'background-color: rgb(' + [color[0], color[1], color[2]].join(', ') + ');';
   };
 
   var boxString = function(rectIndex) {
@@ -143,8 +160,10 @@ fire.child(siteid).once('value', function(snap) {
     $('#mainBody').append('<div id="'+i+'" class="absolute editable" style="'+boxString(i)+rgbString(i)+'">'+rect.text+'</div>');
   });
 
+  // Click rect
   $('.absolute').click(function() {
     var clickedId = $(this).attr('id');
+    currentRectId = clickedId;
     var currentRgb = rects[clickedId].color; //rgb array
     var currentText = rects[clickedId].text;
 
@@ -171,6 +190,11 @@ fire.child(siteid).once('value', function(snap) {
       else{
         active.css("color", "#222");
       }
+      var colorArray = color.substring(4,color.length-1);
+      colorArray=eval('[' + colorArray + ']');
+
+      fire.child(siteid).child('rects').child(currentRectId).child('color').set(colorArray);
+
       active.css("background-color", color);
       active.css('background-image', 'none');
   });
