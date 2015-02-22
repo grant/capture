@@ -7,3 +7,94 @@
 	background-repeat: no-repeat;
 	background-size: 100%;
 }
+
+.fullbox{
+	width:100%;
+	background-image:url('../images/blur02.jpg');
+	background-size: 100%;
+	background-repeat:repeat;
+	text-align:center;
+	padding-top: 100px;
+	padding-bottom: 100px;
+}
+
+#edit{
+	background: rgba(0, 0, 0, .5);
+	height: 100%;
+	width: 100%;
+	position: fixed;
+	display:none;
+	z-index: 50;
+}
+
+#editor{
+	position: fixed;
+	z-index: 100;
+	width: 400px;
+	background-color: white;
+	opacity: 1.0;
+	padding: 20px;
+	border-radius: 3px;
+	position: relative;
+	margin: auto;
+	top: 25%;
+}
+
+#editor p{
+	margin-bottom: 10px;
+}
+
+#colorpicker{
+	height: 35px;
+	font-size: 0;
+	padding-bottom: 20px;
+}
+
+.color{
+	width: 35px;
+	height: 100%;
+	display: inline-block;
+}
+
+.c1 {
+	box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	-webkit-box-sizing:border-box;
+	background-color: #fff;
+	border: 1px solid grey;
+}
+
+.c2 { background-color: #000;}
+.c3 { background-color: #1abc9c;}
+.c4 { background-color: #2ecc71;}
+.c5 { background-color: #3498db;}
+.c6 { background-color: #9b59b6;}
+.c7 { background-color: #f1c40f;}
+.c8 { background-color: #e67e22;}
+.c9 { background-color: #e74c3c;}
+.c10 { background-color: #34495e;}
+
+.textbox{
+	width: 100%;
+}
+
+.right{
+	float: right;
+	margin-left: 10px;
+}
+
+.clearfix{
+	clear:both;
+}
+
+.color:hover{
+	box-shadow: 0px 0px 5px grey;
+}
+
+.editable:hover{
+	box-shadow: 0px 0px 5px orange;
+}
+
+.text{
+	padding: 20px;
+}
