@@ -16,6 +16,7 @@
 	text-align:center;
 	padding-top: 100px;
 	padding-bottom: 100px;
+	color: white;
 }
 
 #edit{
@@ -23,7 +24,7 @@
 	height: 100%;
 	width: 100%;
 	position: fixed;
-	display:none;
+	display: none;
 	z-index: 50;
 }
 
