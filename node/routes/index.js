@@ -57,10 +57,19 @@ router.get('/poll', function (req, res) {
 // Send the image rects
 var rects;
 router.post('/rects', function (req, res) {
+  var rects = JSON.parse(req.body.rects);
+  var rectObjects = rects.map(function (rect) {
+    return {
+      text: '',
+      box: rect,
+      color: null
+    };
+  });
   data = {
-    rects: JSON.parse(req.body.rects),
+    rects: rectObjects,
     aspectRatio: JSON.parse(req.body.aspectRatio)
   };
+
   cb(data);
   res.send('good');
 });
