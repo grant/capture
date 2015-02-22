@@ -94,6 +94,11 @@ fire.child(siteid).once('value', function(snap) {
   json = snap.val();
   var rects = json.rects;
   var aspectRatio = json.aspectRatio;
+  // Set aspect ratio
+  $('#mainBody').css({
+    height: (100 / aspectRatio) + 'vw',
+    'max-width': (100 * aspectRatio) + 'vh'
+  });
 
   var rgbString = function(rectIndex) {
     var color = rects[rectIndex].color;

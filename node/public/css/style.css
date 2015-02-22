@@ -11,3 +11,15 @@ a {
   position: absolute;
   display: block;
 }
+
+#mainBody {
+  width: 100vw;
+  /*height: 56.25vw;*/ /* 100/56.25 = 1.778 */
+  background: pink;
+  max-height: 100vh;
+  /*max-width: 177.78vh;*/ /* 16/9 = 1.778 */
+  margin: 0;
+  position: absolute;
+  top:0;bottom:0; /* vertical center */
+  left:0;right:0; /* horizontal center */
+}
