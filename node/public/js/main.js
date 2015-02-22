@@ -115,6 +115,7 @@ var blurredbgs = ["url('images/blur01.jpg')",
                   "url('images/blur08.jpg')", 
                   "url('images/blur09.jpg')", 
                   ];
+var randombg;
 
 var json;
 fire.child(siteid).once('value', function(snap) {
@@ -131,11 +132,17 @@ fire.child(siteid).once('value', function(snap) {
 
   var rgbString = function(rectIndex) {
     var color = rects[rectIndex].color;
-    if (!color) {
+    var bg = rects[rectIndex].bg;
+    if (!color && !bg) {
       color = getRandomColor(rectIndex);
+      fire.child(siteid).child('rects').child(rectIndex).child('color').set(color);
     }
-    fire.child(siteid).child('rects').child(rectIndex).child('color').set(color);
-    return 'background-color: rgb(' + [color[0], color[1], color[2]].join(', ') + ');';
+    if (bg) {
+      return 'background-image: ' + bg + '; background-size: 100%;' ;
+    }
+    if (color) {
+      return 'background-color: rgb(' + [color[0], color[1], color[2]].join(', ') + ');';
+    }
   };
 
   var boxString = function(rectIndex) {
@@ -194,16 +201,22 @@ fire.child(siteid).once('value', function(snap) {
       colorArray=eval('[' + colorArray + ']');
 
       fire.child(siteid).child('rects').child(currentRectId).child('color').set(colorArray);
+      fire.child(siteid).child('rects').child(currentRectId).child('bg').set(null);
 
       active.css("background-color", color);
       active.css('background-image', 'none');
   });
 
   $(".bgimage").click(function(){
-      var blurredbg = blurredbgs[Math.floor(blurredbgs.length * Math.random())];
-      active.css('background-image', blurredbg);
+      randombg = blurredbgs[Math.floor(blurredbgs.length * Math.random())];
+      active.css('background-image', randombg);
       active.css('background-size', '100%');
       active.css("color", "white");
+
+      fire.child(siteid).child('rects').child(currentRectId).child('bg').set(randombg);
+      // fire.child(siteid).child('rects').child(currentRectId).child('background-size').set('100%');
+      // fire.child(siteid).child('rects').child(currentRectId).child('color').set([255,255,255]);
+
   });
 
   $(".submit").click(function(){
