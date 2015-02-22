@@ -161,6 +161,7 @@ fire.child(siteid).once('value', function(snap) {
   };
 
   $.each(rects, function(i, rect) {
+    // console.log(rect.text);
     if (!rect.text) {
       rect.text = '';
     }
@@ -223,7 +224,7 @@ fire.child(siteid).once('value', function(snap) {
   $(".submit").click(function(){
     textVal = $('#newText').val();
     $('#'+currentRectId).text(textVal);
-    fire.child(siteid).child('rects').child(currentRectId).child('color').set(textVal);
+    fire.child(siteid).child('rects').child(currentRectId).child('text').set(textVal);
     console.log(textVal);
     $("#edit").fadeOut(300);
   });
