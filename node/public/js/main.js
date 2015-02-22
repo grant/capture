@@ -96,8 +96,8 @@ fire.child(siteid).once('value', function(snap) {
   var aspectRatio = json.aspectRatio;
   // Set aspect ratio
   $('#mainBody').css({
-    height: (100 / aspectRatio) + 'vw',
-    'max-width': (100 * aspectRatio) + 'vh'
+    height: (100 / aspectRatio) + 'vw'
+    // 'max-width': (100 * aspectRatio) + 'vh'
   });
 
   var rgbString = function(rectIndex) {
