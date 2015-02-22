@@ -54,6 +54,19 @@ router.get('/poll', function (req, res) {
   }
 });
 
+router.get('/status', function(req, res) {
+  res.send({
+    status: 'good GET',
+    body: req.body
+  });
+});
+router.post('/status', function(req, res) {
+  res.send({
+    status: 'good POST',
+    body: req.body
+  });
+});
+
 // Send the image rects
 var rects;
 router.post('/rects', function (req, res) {
