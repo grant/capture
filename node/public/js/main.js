@@ -184,10 +184,10 @@ fire.child(siteid).once('value', function(snap) {
 
     // fire.child('rects').child(clickedId).child('text').set(newText);
 
-    if (newText) {
-      $('#'+clickedId).text(newText);
+    // if (newText) {
+      // $('#'+clickedId).text(newText);
       // fire.child(json + '.' + clickedId)
-    }
+    // }
     // alert('clickedId: ' + clickedId + '\ncurrentRgb: ' + currentRgb + '\ncurrentText: ' + currentText);
   });
   $(".color").click(function(){
@@ -222,6 +222,7 @@ fire.child(siteid).once('value', function(snap) {
 
   $(".submit").click(function(){
     textVal = $('#newText').val();
+    $('#'+currentRectId).text(textVal);
     fire.child(siteid).child('rects').child(currentRectId).child('color').set(textVal);
     console.log(textVal);
     $("#edit").fadeOut(300);
