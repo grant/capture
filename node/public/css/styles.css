@@ -73,6 +73,14 @@
 .c8 { background-color: #e67e22;}
 .c9 { background-color: #e74c3c;}
 .c10 { background-color: #34495e;}
+.bgimage { 
+	width: 35px;
+	height: 100%;
+	display: inline-block;
+	background-image:url('http://placehold.it/35');
+	background-size: 100%;
+	background-repeat:no-repeat;
+}
 
 .textbox{
 	width: 100%;
@@ -88,6 +96,10 @@
 }
 
 .color:hover{
+	box-shadow: 0px 0px 5px grey;
+}
+
+.bgimage:hover{
 	box-shadow: 0px 0px 5px grey;
 }
 
