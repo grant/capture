@@ -14,7 +14,7 @@ $(document).ready(function(){
 
     $(".editable").click(function(){
         active = $(this);
-        $("#edit").show();
+        $("#edit").fadeIn(200);
     });
 
     $(".color").click(function(){
@@ -37,7 +37,7 @@ $(document).ready(function(){
     });
 
     $(".submit").click(function(){
-        $("#edit").hide();
+        $("#edit").fadeOut(300);
     });
 
 });
