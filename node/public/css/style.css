@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
@@ -10,6 +14,8 @@ a {
 .absolute {
   position: absolute;
   display: block;
+  padding: 10px;
+  text-align: center;
 }
 
 #mainBody {

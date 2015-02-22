@@ -127,7 +127,7 @@ fire.child(siteid).once('value', function(snap) {
     if (!rect.text) {
       rect.text = '';
     }
-    $('#mainBody').append('<div id="'+i+'" class="absolute" style="text-align: center;'+boxString(i)+rgbString(i)+'">'+rect.text+'</div>');
+    $('#mainBody').append('<div id="'+i+'" class="absolute" style="'+boxString(i)+rgbString(i)+'">'+rect.text+'</div>');
   });
 
   $('.absolute').click(function() {
