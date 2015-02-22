@@ -43,7 +43,7 @@ var fire = new Firebase('https://shining-fire-1739.firebaseio.com/');
 //         g: 150,
 //         b: 0
 //       }
-//       // text: 'hello there'
+//       text: 'hello there'
 //     },
 //     3: {
 //       box: {
@@ -57,7 +57,7 @@ var fire = new Firebase('https://shining-fire-1739.firebaseio.com/');
 //         g: 150,
 //         b: 0
 //       }
-//       // text: 'hello there'
+//       text: 'hello there'
 //     },
 //     4: {
 //       box: {
@@ -71,7 +71,7 @@ var fire = new Firebase('https://shining-fire-1739.firebaseio.com/');
 //         g: 150,
 //         b: 0
 //       }
-//       // text: 'hello there'
+//       text: 'hello there'
 //     }
 //   }
 // };
@@ -107,6 +107,8 @@ fire.child('rects').once('value', function(snap) {
     var currentText = json[clickedId].text;
 
     var newText = prompt("Change Text");
+
+    fire.child('rects').child(clickedId).child('text').set(newText);
 
     if (newText) {
       $('#'+clickedId).text(newText);
