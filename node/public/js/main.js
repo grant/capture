@@ -93,16 +93,12 @@ var json;
 fire.child(siteid).once('value', function(snap) {
   json = snap.val();
   var rects = json.rects;
+  var aspectRatio = json.aspectRatio;
 
   var rgbString = function(rectIndex) {
     var color = rects[rectIndex].color;
     if (!color) {
       color = getRandomColor();
-      // {
-      //   r: 123,
-      //   g: 123,
-      //   b: 123
-      // };
     }
     return 'background-color: rgb(' + [color.r, color.g, color.b].join(', ') + ');';
   };

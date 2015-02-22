@@ -23,13 +23,21 @@ router.post('/upload', function (req, res) {
   mostRecentImage = req.body.imgUrl;
   mostRecentName = req.body.name;
   (function(res){
-    cb = function(rects) {
+    cb = function(data) {
+      var rects = data.rects;
+      var aspectRatio = data.aspectRatio;
       var data = {
         name: mostRecentName,
-        rects: rects
+        rects: rects,
+        aspectRatio: aspectRatio
       };
       fire.child(mostRecentName).set(data);
-      res.send(rects);
+      var url = req.protocol + '://' + req.get('host') + '/' + mostRecentName;
+      res.send({
+        url: url,
+        rects: rects,
+        aspectRatio: aspectRatio
+      });
     };
   })(res);
 });
@@ -49,8 +57,11 @@ router.get('/poll', function (req, res) {
 // Send the image rects
 var rects;
 router.post('/rects', function (req, res) {
-  rects = JSON.parse(req.body.data);
-  cb(rects);
+  data = {
+    rects: JSON.parse(req.body.rects),
+    aspectRatio: JSON.parse(req.body.aspectRatio)
+  };
+  cb(data);
   res.send('good');
 });
 
