@@ -8,9 +8,16 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 
 var app = express();
+// var Gun = require('gun');
 
-var gunApp = require("./gunApp");
-gunApp(app);
+// var gun = Gun({
+//   file: 'data.json'
+// });
+
+// gun.attach(app);
+// gun.load('testing').blank(function() {
+//   this.set(json);
+// });
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -32,7 +39,7 @@ app.use('/', routes);
 //     err.status = 404;
 //     next(err);
 // });
-app.set('port', process.env.PORT || 3000);
+// app.set('port', process.env.PORT || 3000);
 // console.log('go to: http://localhost:' + app.get('port'));
 
 // error handlers
