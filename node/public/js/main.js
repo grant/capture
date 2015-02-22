@@ -109,7 +109,7 @@ fire.child(siteid).once('value', function(snap) {
   };
 
   var boxString = function(rectIndex) {
-    var box = rects[rectIndex];
+    var box = rects[rectIndex].box;
     var x = box[0] * 100;
     var y = box[1] * 100;
     var width = box[2] * 100;
