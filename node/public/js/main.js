@@ -89,6 +89,19 @@ function getRandomColor () {
   }
 }
 
+var active;
+var darkcolors = ['rgb(0, 0, 0)', 'rgb(52, 73, 94)', 'rgb(231, 76, 60)', 'rgb(155, 89, 182)', 'rgb(52, 152, 219)'];
+var blurredbgs = ["url('images/blur01.jpg')", 
+                  "url('images/blur02.jpg')", 
+                  "url('images/blur03.jpg')", 
+                  "url('images/blur04.jpg')", 
+                  "url('images/blur05.jpg')", 
+                  "url('images/blur06.jpg')", 
+                  "url('images/blur07.jpg')", 
+                  "url('images/blur08.jpg')", 
+                  "url('images/blur09.jpg')", 
+                  ];
+
 var json;
 fire.child(siteid).once('value', function(snap) {
   json = snap.val();
@@ -127,7 +140,7 @@ fire.child(siteid).once('value', function(snap) {
     if (!rect.text) {
       rect.text = '';
     }
-    $('#mainBody').append('<div id="'+i+'" class="absolute" style="'+boxString(i)+rgbString(i)+'">'+rect.text+'</div>');
+    $('#mainBody').append('<div id="'+i+'" class="absolute editable" style="'+boxString(i)+rgbString(i)+'">'+rect.text+'</div>');
   });
 
   $('.absolute').click(function() {
@@ -135,18 +148,57 @@ fire.child(siteid).once('value', function(snap) {
     var currentRgb = rects[clickedId].color; //rgb array
     var currentText = rects[clickedId].text;
 
-    var newText = prompt("Change Text");
+    console.log('click');
+    active = $(this);
+    $("#edit").fadeIn(200);
 
-    fire.child('rects').child(clickedId).child('text').set(newText);
 
-    if (newText) {
-      $('#'+clickedId).text(newText);
+    // var newText = prompt("Change Text");
+
+    // fire.child('rects').child(clickedId).child('text').set(newText);
+
+    // if (newText) {
+      // $('#'+clickedId).text(newText);
       // fire.child(json + '.' + clickedId)
-    }
+    // }
     // alert('clickedId: ' + clickedId + '\ncurrentRgb: ' + currentRgb + '\ncurrentText: ' + currentText);
+  });
+  $(".color").click(function(){
+      var color = $(this).css("background-color");
+      if(jQuery.inArray(color, darkcolors) != -1){
+        active.css("color", "white");
+      }
+      else{
+        active.css("color", "#222");
+      }
+      active.css("background-color", color);
+      active.css('background-image', 'none');
+  });
+
+  $(".bgimage").click(function(){
+      var blurredbg = blurredbgs[Math.floor(blurredbgs.length * Math.random())];
+      active.css('background-image', blurredbg);
+      active.css('background-size', '100%');
+      active.css("color", "white");
+  });
+
+  $(".submit").click(function(){
+      $("#edit").fadeOut(300);
   });
 });
 
 function stripQueryStringAndHashFromPath(url) {
   return url.split("?")[0].split("#")[0];
 }
+
+// 
+// $(document).ready(function(){
+    
+
+//     $(".editable").click(function(){
+
+//     });
+
+    
+
+// });
