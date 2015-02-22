@@ -13,7 +13,6 @@ var gunApp = require("./gunApp");
 gunApp(app);
 
 // view engine setup
-console.log("the base directory is", __dirname);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
@@ -34,7 +33,7 @@ app.use('/', routes);
 //     next(err);
 // });
 app.set('port', process.env.PORT || 3000);
-console.log('go to: http://localhost:' + app.get('port'));
+// console.log('go to: http://localhost:' + app.get('port'));
 
 // error handlers
 

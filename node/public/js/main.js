@@ -1,4 +1,4 @@
-var gun = Gun('http://localhost:3000/gun').load('testing').path('rects');
+var gun = Gun(location + 'gun').load('testing').path('rects');
 
 gun.map(function(val, i) {
   console.log(val, i);
